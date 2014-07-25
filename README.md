@@ -3,16 +3,12 @@ Quit-Hogging
 
 AdBlock blocker / detection. Block or display a message to AdBlock users. Requires JQuery.
 
-Example:
+Blocking Example:
 
 ```html
 <h1>Welcome!</h1>
-<div id="message" style="display:none;"></div>
 <p>
-    Content example. Integer et ipsum eu est interdum lobortis. 
-    Nunc nec nisl sollicitudin, suscipit ante eget, auctor nisl. 
-    Etiam accumsan nunc eget fringilla rhoncus. Pellentesque eget venenatis sem, sed ornare felis. 
-    Suspendisse volutpat odio in egestas bibendum. Aliquam scelerisque purus at tristique fermentum. 
+    This content will be blocked if AdBlock is enabled.
 </p>
         
         
@@ -21,12 +17,31 @@ Example:
 <script src="js/quit-hogging.js"></script>
 <script>
     QuitHogging({
-        block: false,
+        block: true,
         blockTitle: 'Adblock Detected',
-        blockContent: 'Please whitelist our website in order to view our content',
+        blockContent: 'Please whitelist our website in order to view our content'
+    });
+</script>
+```
+
+Message Example:
+
+```html
+<h1>Welcome!</h1>
+<div id="message" style="display:none;"></div>
+<p>
+    My content.
+</p>
+        
+        
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="js/ads.js"></script>
+<script src="js/quit-hogging.js"></script>
+<script>
+    QuitHogging({
         displayMessage: true,
         displayMessageId: 'message',
-        displayMessageContent: 'Please whitelist our website from AdBlock.'
+        displayMessageContent: 'Please whitelist our website from AdBlock!'
     });
 </script>
 ```
