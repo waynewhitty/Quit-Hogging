@@ -156,13 +156,13 @@ function quitHoggingModal(){
     
     html.push('<div id="' + quitHoggingId + '"' + modalStyle + '>');
     html.push('<div' + infoStyle + '>');
-        
     html.push('<h1>' + quitHoggingBlockTitle + '</h1>');
     html.push('<p>' + quitHoggingBlockMessage + '</p>');
-        
     html.push('</div>');
     html.push('</div>');
+    
     return html.join('');
+    
 }
 
 
