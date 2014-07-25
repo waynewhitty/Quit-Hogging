@@ -1,9 +1,9 @@
 Quit-Hogging
 ============
 
-AdBlock blocker / detection. Block or display a message to AdBlock users. Requires JQuery.
+JavaScript-based AdBlock blocker / detection. Block or display a message to AdBlock users. Requires JQuery.
 
-Blocking Example:
+If you want to block AdBlock users:
 
 ```html
 <h1>Welcome!</h1>
@@ -24,7 +24,7 @@ Blocking Example:
 </script>
 ```
 
-Message Example:
+If you want to display a message to Adblock users:
 
 ```html
 <h1>Welcome!</h1>
