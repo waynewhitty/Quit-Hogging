@@ -3,7 +3,7 @@ Quit-Hogging
 
 AdBlock blocker / detection. Block or display a message to AdBlock users. Requires JQuery.
 
-Params:
+Params / Options:
 
 - block: true|false - If you want to block the user or not.
 
