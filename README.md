@@ -48,13 +48,13 @@ Message Example:
 
 Params / Options:
 
-- block: boolean - If you want to block the user or not.
+- block: boolean - If you want to block the user or not. FALSE by default.
 
 - blockTitle: string - The header / title that will be displayed if the user is blocked.
 
 - blockContent: string - Paragraph text that will be displayed if the user is blocked.
 
-- displayMessage: boolean - If you want to display a message to the user or not.
+- displayMessage: boolean - If you want to display a message to the user or not. FALSE by default.
 
 - displayMessageId: string - The ID of the div that you want to display the message in.
 
