@@ -1,5 +1,3 @@
-
-
 /**
  * Default vars, etc.
  */
@@ -11,12 +9,6 @@ var quitHoggingId;
 var quitHoggingDisplayMessage = false;
 var quitHoggingDisplayMessageId;
 var quitHoggingDisplayContent = "Please whitelist our website from AdBlock.";
-
-
-
-
-
-
 
 /**
  * CSS style for our modal background. Will be inline.
@@ -31,7 +23,6 @@ var quitHoggingModalStyle = {
     'z-index': '9999',
     'padding-top': '15px'
 };
-
 
 /**
  * CSS style for the message box that is displayed when the modal appears. Will
@@ -48,12 +39,6 @@ var quitHoggingModalInfoStyle = {
     'font-weight': 'bold'
 }
 
-
-
-
-
-
-
 /**
  * Setup. Takes in params / options via an object.
  */
@@ -69,7 +54,7 @@ function QuitHogging(params){
         quitHoggingBlockTitle = quitHoggingParams.blockTitle;
     }
     if(quitHoggingParams.blockContent !== undefined){
-        quitHoggingBlockMessage = quitHoggingParams.blocContent;
+        quitHoggingBlockMessage = quitHoggingParams.blockContent;
     }
     if(quitHoggingParams.displayMessage !== undefined){
         quitHoggingDisplayMessage = quitHoggingParams.displayMessage;
@@ -79,20 +64,11 @@ function QuitHogging(params){
     }
     if(quitHoggingParams.displayMessageContent !== undefined){
         quitHoggingDisplayContent = quitHoggingParams.displayMessageContent;
-    }
-    
+    }    
     window.onload = function () { 
         quitHoggingDetect();
     }
 }
-
-
-
-
-
-
-
-
 
 /**
  * Detect whether AdBlock is enabled or not.
@@ -109,12 +85,6 @@ function quitHoggingDetect(){
     }
 }
 
-
-
-
-
-
-
 /**
  * Block page by displaying modal.
  */
@@ -123,12 +93,6 @@ function quitHoggingBlocker(){
     $('body').append(html);
 }
 
-
-
-
-
-
-
 /**
  * Display a message to the user.
  */
@@ -136,13 +100,6 @@ function quitHoggingMessage(){
     $('#' + quitHoggingDisplayMessageId).html(quitHoggingDisplayContent);
     $('#' + quitHoggingDisplayMessageId).fadeIn();
 }
-
-
-
-
-
-
-
 
 /**
  * Create the HTML for our modal.
@@ -165,13 +122,6 @@ function quitHoggingModal(){
     
 }
 
-
-
-
-
-
-
-
 /**
  * Build inline CSS style from an object.
  */
@@ -182,13 +132,6 @@ function quitHoggingBuildInlineStyle(obj){
     });
     return style.join('; ');
 }
-
-
-
-
-
-
-
 
 /**
  * Generate a random ID for our modal blocker.
