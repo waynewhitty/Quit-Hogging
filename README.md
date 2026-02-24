@@ -1,6 +1,8 @@
 Quit-Hogging
 ============
 
+**2026 update: I'll be honest. I completely forgot about my Github account and this library. While the ads.js bait tactic might still work (to a degree), I do not recommend using this old library. I created this as a little side project in 2014. It relies on jQuery, can be easily bypassed, and its use of window.onload may conflict with other libraries.**
+
 JavaScript-based AdBlock blocker / detection. Block or display a message to AdBlock users. Requires JQuery.
 
 If you want to block AdBlock users:
