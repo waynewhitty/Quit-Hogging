@@ -3,6 +3,8 @@ Quit-Hogging
 
 JavaScript-based AdBlock blocker / detection. Block or display a message to AdBlock users. No dependencies required.
 
+Note: Updated old library w/ Claude as test.
+
 ## How It Works
 
 1. `ads.js` sets a variable (`iExist = true`). AdBlock blocks files with "ads" in the name, so the variable stays undefined for AdBlock users.
