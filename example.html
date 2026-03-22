@@ -2,26 +2,46 @@
 <html>
     <head>
         <title>Example: QuitHogging</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
     </head>
     <body>
         <h1>Welcome!</h1>
         <div id="message" style="display:none;"></div>
         <p>Content example. Integer et ipsum eu est interdum lobortis.</p>
-        
-        
-        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+
         <script src="js/ads.js"></script>
         <script src="js/quit-hogging.js"></script>
         <script>
-            QuitHogging({
-                block: false,
-                blockTitle: 'Adblock Detected',
-                blockContent: 'Please whitelist our website in order to view our content',
-                displayMessage: true,
-                displayMessageId: 'message',
-                displayMessageContent: 'Please whitelist our website from AdBlock.'
+            // Block mode example (with customization)
+            var qh = QuitHogging({
+                block: true,
+                blockTitle: 'AdBlock Detected',
+                blockContent: 'Please whitelist our website in order to view our content.',
+                blockButtonText: 'I have disabled AdBlock',
+                persistent: true,
+                animation: 'fade',
+                theme: {
+                    overlayBackground: 'rgba(0, 0, 0, 0.9)',
+                    boxBackground: '#2c5ea8',
+                    borderRadius: '12px'
+                },
+                onDetected: function () {
+                    console.log('AdBlock was detected');
+                },
+                onDismissAttempt: function () {
+                    console.log('User attempted to remove the popup');
+                }
             });
+
+            // Message mode example (uncomment to use instead):
+            //
+            // QuitHogging({
+            //     displayMessage: true,
+            //     displayMessageId: 'message',
+            //     displayMessageContent: 'Please whitelist our website from AdBlock.',
+            //     animation: 'fade'
+            // });
         </script>
     </body>
 </html>

@@ -1,42 +1,35 @@
 Quit-Hogging
 ============
 
-**2026 update: I'll be honest. I completely forgot about my Github account and this library. While the ads.js bait tactic might still work (to a degree), I do not recommend using this old library. I created this as a little side project in 2014. It relies on jQuery, can be easily bypassed, and its use of window.onload may conflict with other libraries.**
+JavaScript-based AdBlock blocker / detection. Block or display a message to AdBlock users. No dependencies required.
 
-JavaScript-based AdBlock blocker / detection. Block or display a message to AdBlock users. Requires JQuery.
+## How It Works
 
-If you want to block AdBlock users:
+1. `ads.js` sets a variable (`iExist = true`). AdBlock blocks files with "ads" in the name, so the variable stays undefined for AdBlock users.
+2. `quit-hogging.js` checks for that variable on page load and shows a blocking overlay or inline message.
+3. If `persistent` is enabled (default), a MutationObserver watches for removal of the popup via DevTools and automatically recreates it.
+
+## Quick Start
+
+### Block AdBlock users
 
 ```html
-<h1>Welcome!</h1>
-<p>
-    This content will be blocked if AdBlock is enabled.
-</p>
-        
-        
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="js/ads.js"></script>
 <script src="js/quit-hogging.js"></script>
 <script>
     QuitHogging({
         block: true,
-        blockTitle: 'Adblock Detected',
-        blockContent: 'Please whitelist our website in order to view our content'
+        blockTitle: 'AdBlock Detected',
+        blockContent: 'Please whitelist our website in order to view our content.'
     });
 </script>
 ```
 
-If you want to display a message to Adblock users:
+### Display a message to AdBlock users
 
 ```html
-<h1>Welcome!</h1>
 <div id="message" style="display:none;"></div>
-<p>
-    My content.
-</p>
-        
-        
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <script src="js/ads.js"></script>
 <script src="js/quit-hogging.js"></script>
 <script>
@@ -48,16 +41,74 @@ If you want to display a message to Adblock users:
 </script>
 ```
 
-Params / Options:
+## Options
 
-- block: boolean - If you want to block the user or not. FALSE by default.
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `block` | boolean | `false` | Show a full-screen blocking overlay |
+| `blockTitle` | string | `'AdBlock Detected!'` | Overlay heading text |
+| `blockContent` | string | `'Please whitelist our website...'` | Overlay body text |
+| `blockButtonText` | string | `''` | Optional button text (e.g. `'I have disabled AdBlock'`) |
+| `blockButtonLink` | string | `''` | URL the button navigates to (empty = reload page) |
+| `displayMessage` | boolean | `false` | Show an inline message in a target element |
+| `displayMessageId` | string | `''` | ID of the element to display the message in |
+| `displayMessageContent` | string | `'Please whitelist...'` | Message text/HTML |
+| `persistent` | boolean | `true` | Recreate popup if user removes it via DevTools |
+| `animation` | string | `'fade'` | Animation style: `'fade'`, `'slide'`, or `'none'` |
+| `animationDuration` | string | `'0.3s'` | CSS animation duration |
+| `customClass` | string | `''` | Extra CSS class added to the overlay |
+| `zIndex` | number | `9999` | z-index of the overlay |
+| `onDetected` | function | `null` | Callback when AdBlock is detected |
+| `onDismissAttempt` | function | `null` | Callback when user tries to remove the popup |
 
-- blockTitle: string - The header / title that will be displayed if the user is blocked.
+## Theme Customization
 
-- blockContent: string - Paragraph text that will be displayed if the user is blocked.
+Pass a `theme` object to customize the overlay appearance:
 
-- displayMessage: boolean - If you want to display a message to the user or not. FALSE by default.
+```js
+QuitHogging({
+    block: true,
+    theme: {
+        overlayBackground: 'rgba(0, 0, 0, 0.9)',
+        boxBackground: '#2c5ea8',
+        textColor: '#ffffff',
+        titleColor: '#ffffff',
+        fontFamily: 'Georgia, serif',
+        buttonBackground: '#ffffff',
+        buttonColor: '#2c5ea8',
+        borderRadius: '12px',
+        maxWidth: '500px'
+    }
+});
+```
 
-- displayMessageId: string - The ID of the div that you want to display the message in.
+All theme properties are optional — only override what you need.
 
-- displayMessageContent: string - Text / HTML that you want to be displayed in the message box.
+## Deletion Detection
+
+When `persistent: true` (default), the library uses three layers of protection:
+
+1. **MutationObserver** on the document body detects immediate removal of the overlay element
+2. **MutationObserver** on the document head detects removal of the injected `<style>` tag
+3. **Fallback interval** (every 2 seconds) catches edge cases
+
+Use the `onDismissAttempt` callback to track removal attempts.
+
+## Programmatic Control
+
+`QuitHogging()` returns an object with control methods:
+
+```js
+var qh = QuitHogging({ block: true });
+
+// Manually re-run detection
+qh.detect();
+
+// Remove overlay and clean up observers
+qh.destroy();
+```
+
+## Notes
+
+- Requires `style-src 'unsafe-inline'` if your site uses a Content Security Policy, since styles are injected at runtime.
+- Some aggressive ad blockers may add `quit-hogging.js` to their filter lists. Consider renaming the file if this becomes an issue.
